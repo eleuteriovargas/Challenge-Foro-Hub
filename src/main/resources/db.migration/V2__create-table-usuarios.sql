@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS topicos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(150) NOT NULL,
+    contenido TEXT NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    estado ENUM('NO_RESPONDIDO', 'NO_SOLUCIONADO', 'SOLUCIONADO', 'CERRADO') NOT NULL DEFAULT 'NO_RESPONDIDO',
+    autor_id BIGINT NOT NULL,
+    FOREIGN KEY (autor_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Crear índice para búsquedas por autor
+CREATE INDEX idx_topico_autor ON topicos(autor_id);
