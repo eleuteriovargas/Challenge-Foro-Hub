@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Service
 public class ServicioJwt {
 
-    private static final String CLAVE_SECRETA = "tu_clave_secreta_muy_larga_y_compleja_para_que_sea_segura_256_bits";
+    private static final String CLAVE_SECRETA = "fwQMSEgZ98hK+A/mw9Dkce24Btvy3QCRKT/GZarU90I=\n";
 
     public String generarToken(UserDetails detallesUsuario) {
         return generarToken(new HashMap<>(), detallesUsuario);

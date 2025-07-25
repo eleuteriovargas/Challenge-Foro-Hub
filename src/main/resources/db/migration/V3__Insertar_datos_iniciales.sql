@@ -6,6 +6,10 @@ VALUES ('Admin Principal', 'admin@forohub.com', '$2a$10$XURPShQNCsLjp1ESc2laoObo
 INSERT INTO usuarios (nombre, email, clave)
 VALUES ('Usuario Demo', 'usuario@forohub.com', '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP2');
 
+-- Insertar usuario regular 123456
+INSERT INTO usuarios (nombre, email, clave)
+VALUES ('Usuario Prueba', 'usuarioPrueba@forohub.com', '$2a$12$jgK1eURt3pOQSxOfzV8zAuvFdPqnmUFhoz.UT6E0TuSF7rox/C73q');
+
 -- Insertar algunos tópicos de ejemplo
 INSERT INTO topicos (titulo, contenido, autor_id)
 VALUES

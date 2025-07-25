@@ -18,7 +18,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/topicos")
+@RequestMapping("/topicos")
 public class ControladorTopico {
 
     private final IServicioTopico servicioTopico;
@@ -28,25 +28,20 @@ public class ControladorTopico {
         this.servicioTopico = servicioTopico;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<TopicoDto>> listarTopicos() {
-//        return ResponseEntity.ok(servicioTopico.getTopicos());
-//    }
-
-    @Operation(
-            summary = "Listar todos los tópicos",
-            description = "Obtiene una lista paginada de todos los tópicos disponibles"
-    )
+//    @Operation(
+//            summary = "Listar todos los tópicos",
+//            description = "Obtiene una lista paginada de todos los tópicos disponibles"
+//    )
     @ApiResponse(responseCode = "200", description = "Lista de tópicos obtenida exitosamente")
     @GetMapping
     public ResponseEntity<List<TopicoDto>> listarTopicos() {
         return ResponseEntity.ok(servicioTopico.getTopicos());
     }
 
-    @Operation(
-            summary = "Obtener tópico por ID",
-            description = "Recupera un tópico específico por su identificador único"
-    )
+//    @Operation(
+//            summary = "Obtener tópico por ID",
+//            description = "Recupera un tópico específico por su identificador único"
+//    )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tópico encontrado"),
             @ApiResponse(responseCode = "404", description = "Tópico no encontrado")
@@ -58,10 +53,10 @@ public class ControladorTopico {
         return ResponseEntity.ok(servicioTopico.getTopicoPorId(id));
     }
 
-    @Operation(
-            summary = "Crear nuevo tópico",
-            description = "Crea un nuevo tópico en el foro (requiere autenticación)"
-    )
+//    @Operation(
+//            summary = "Crear nuevo tópico",
+//            description = "Crea un nuevo tópico en el foro (requiere autenticación)"
+//    )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Tópico creado exitosamente"),
             @ApiResponse(responseCode = "400", description = "Datos del tópico inválidos"),
@@ -75,7 +70,7 @@ public class ControladorTopico {
 
         TopicoDto topicoCreado = servicioTopico.crearTopico(topicoDto, usuario.getUsername());
 
-        URI ubicacion = uriBuilder.path("/api/topicos/{id}")
+        URI ubicacion = uriBuilder.path("/topicos/{id}")
                 .buildAndExpand(topicoCreado.getId())
                 .toUri();
 
