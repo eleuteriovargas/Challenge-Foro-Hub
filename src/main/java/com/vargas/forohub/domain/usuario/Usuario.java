@@ -1,4 +1,4 @@
-package com.vargas.forohub.model;
+package com.vargas.forohub.domain.usuario;
 
 
 

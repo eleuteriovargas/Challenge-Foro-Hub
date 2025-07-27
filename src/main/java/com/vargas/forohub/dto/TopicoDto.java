@@ -1,9 +1,8 @@
 package com.vargas.forohub.dto;
 
 
-import com.vargas.forohub.model.Topico;
+import com.vargas.forohub.domain.topico.Topico;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

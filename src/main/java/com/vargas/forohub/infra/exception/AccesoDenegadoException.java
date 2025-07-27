@@ -1,4 +1,4 @@
-package com.vargas.forohub.exception;
+package com.vargas.forohub.infra.exception;
 
 
 public class AccesoDenegadoException extends RuntimeException {

@@ -1,18 +1,17 @@
-package com.vargas.forohub.config;
+package com.vargas.forohub.infra.springDoc;
+
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import io.swagger.v3.oas.models.security.SecurityScheme;
-
-
 @Configuration
-public class SwaggerConfig {
+public class SpringDocConfiguration {
 
     @Bean
     public OpenAPI foroHubOpenAPI() {
@@ -23,6 +22,7 @@ public class SwaggerConfig {
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
                                         .bearerFormat("JWT")))
+                //.addSecurityItem(new SecurityRequirement().addList("bearer-key"))
                 .info(new Info()
                         .title("API ForoHub")
                         .description("Documentación de la API REST para el sistema de foros ForoHub")
@@ -35,7 +35,6 @@ public class SwaggerConfig {
                                 .name("Apache 2.0")
                                 .url("https://springdoc.org")));
     }
-
 }
 
 

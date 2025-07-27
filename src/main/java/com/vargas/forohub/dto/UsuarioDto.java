@@ -2,11 +2,10 @@ package com.vargas.forohub.dto;
 
 
 
-import com.vargas.forohub.model.Usuario;
+import com.vargas.forohub.domain.usuario.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,6 @@
-package com.vargas.forohub.config;
+package com.vargas.forohub.infra.security;
 
 
-import com.vargas.forohub.segurity.ServicioDetallesUsuarioImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +25,7 @@ public class ConfiguracionProveedorAutenticacion {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 }

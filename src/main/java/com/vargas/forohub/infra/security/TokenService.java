@@ -1,5 +1,8 @@
-package com.vargas.forohub.segurity;
+package com.vargas.forohub.infra.security;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,9 +19,12 @@ import java.util.function.Function;
 
 
 @Service
-public class ServicioJwt {
+public class TokenService {
 
     private static final String CLAVE_SECRETA = "fwQMSEgZ98hK+A/mw9Dkce24Btvy3QCRKT/GZarU90I=\n";
+
+
+    private static final String ISSUER = "Forohub";
 
     public String generarToken(UserDetails detallesUsuario) {
         return generarToken(new HashMap<>(), detallesUsuario);
@@ -68,6 +74,21 @@ public class ServicioJwt {
     private Key obtenerClaveFirma() {
         byte[] bytesClave = Decoders.BASE64.decode(CLAVE_SECRETA);
         return Keys.hmacShaKeyFor(bytesClave);
+    }
+
+    public String getSubject(String tokenJWT) {
+        try {
+            System.out.println("Validando token: " + tokenJWT); // Log para debug
+            var algoritmo = Algorithm.HMAC256(CLAVE_SECRETA);
+            return JWT.require(algoritmo)
+                    .withIssuer(ISSUER)
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (JWTVerificationException exception){
+            System.err.println("Error validando token: " + exception.getMessage());
+            throw new RuntimeException("Token inválido o expirado");
+        }
     }
 }
 

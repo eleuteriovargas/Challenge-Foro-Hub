@@ -1,5 +1,6 @@
-package com.vargas.forohub.model;
+package com.vargas.forohub.domain.topico;
 
+import com.vargas.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

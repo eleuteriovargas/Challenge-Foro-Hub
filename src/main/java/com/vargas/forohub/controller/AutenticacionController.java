@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/autenticacion")
 @Tag(name = "Autenticación", description = "API para registro y autenticación de usuarios")
 @RequiredArgsConstructor
-public class ControladorAutenticacion {
+public class AutenticacionController {
 
     private final IServicioAutenticacion servicioAutenticacion;
 

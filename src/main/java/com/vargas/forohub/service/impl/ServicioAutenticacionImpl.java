@@ -4,10 +4,10 @@ package com.vargas.forohub.service.impl;
 import com.vargas.forohub.dto.RespuestaAutenticacion;
 import com.vargas.forohub.dto.SolicitudAutenticacion;
 import com.vargas.forohub.dto.UsuarioDto;
-import com.vargas.forohub.model.Usuario;
-import com.vargas.forohub.model.Usuario.RolUsuario;
-import com.vargas.forohub.repository.RepositorioUsuario;
-import com.vargas.forohub.segurity.ServicioJwt;
+import com.vargas.forohub.domain.usuario.Usuario;
+import com.vargas.forohub.domain.usuario.Usuario.RolUsuario;
+import com.vargas.forohub.domain.usuario.UsuarioRepository;
+import com.vargas.forohub.infra.security.TokenService;
 import com.vargas.forohub.service.IServicioAutenticacion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,9 +19,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ServicioAutenticacionImpl implements IServicioAutenticacion {
 
-    private final RepositorioUsuario repositorioUsuario;
+    private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
-    private final ServicioJwt servicioJwt;
+    private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
 
     @Override
@@ -33,9 +33,9 @@ public class ServicioAutenticacionImpl implements IServicioAutenticacion {
                 .rol(RolUsuario.USUARIO)
                 .build();
 
-        repositorioUsuario.save(usuario);
+        usuarioRepository.save(usuario);
 
-        var jwtToken = servicioJwt.generarToken(usuario);
+        var jwtToken = tokenService.generarToken(usuario);
         return RespuestaAutenticacion.builder()
                 .token(jwtToken)
                 .build();
@@ -50,10 +50,10 @@ public class ServicioAutenticacionImpl implements IServicioAutenticacion {
                 )
         );
 
-        var usuario = repositorioUsuario.findByEmail(solicitud.getEmail())
+        var usuario = usuarioRepository.findByEmail(solicitud.getEmail())
                 .orElseThrow();
 
-        var jwtToken = servicioJwt.generarToken(usuario);
+        var jwtToken = tokenService.generarToken(usuario);
         return RespuestaAutenticacion.builder()
                 .token(jwtToken)
                 .build();

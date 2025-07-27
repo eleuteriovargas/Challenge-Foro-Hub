@@ -1,13 +1,12 @@
-package com.vargas.forohub.segurity;
+package com.vargas.forohub.infra.security;
 
 
 
-import com.vargas.forohub.segurity.ServicioJwt;
-import com.vargas.forohub.segurity.ServicioDetallesUsuarioImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,15 +17,18 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
-public class FiltroAutenticacionJwt extends OncePerRequestFilter {
 
-    private final ServicioJwt servicioJwt;
+@Component
+public class SecurityFilter extends OncePerRequestFilter {
+
+    @Autowired
+    private final TokenService tokenService;
+
     private final ServicioDetallesUsuarioImpl servicioDetallesUsuario;
 
-    public FiltroAutenticacionJwt(ServicioJwt servicioJwt,
-                                  ServicioDetallesUsuarioImpl servicioDetallesUsuario) {
-        this.servicioJwt = servicioJwt;
+    public SecurityFilter(TokenService tokenService,
+                          ServicioDetallesUsuarioImpl servicioDetallesUsuario) {
+        this.tokenService = tokenService;
         this.servicioDetallesUsuario = servicioDetallesUsuario;
     }
 
@@ -49,13 +51,13 @@ public class FiltroAutenticacionJwt extends OncePerRequestFilter {
 
         // Extraer el token JWT
         jwt = authHeader.substring(7);
-        emailUsuario = servicioJwt.extraerEmail(jwt);
+        emailUsuario = tokenService.extraerEmail(jwt);
 
         // Validar token y autenticar al usuario
         if (emailUsuario != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails detallesUsuario = this.servicioDetallesUsuario.loadUserByUsername(emailUsuario);
 
-            if (servicioJwt.esTokenValido(jwt, detallesUsuario)) {
+            if (tokenService.esTokenValido(jwt, detallesUsuario)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         detallesUsuario,
                         null,

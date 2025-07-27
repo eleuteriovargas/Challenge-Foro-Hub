@@ -2,10 +2,10 @@ package com.vargas.forohub.controller;
 
 import com.vargas.forohub.dto.TopicoDto;
 import com.vargas.forohub.service.IServicioTopico;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +19,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/topicos")
-public class ControladorTopico {
+@SecurityRequirement(name = "bearer-key")
+public class TopicoController {
 
     private final IServicioTopico servicioTopico;
 
     @Autowired
-    public ControladorTopico(IServicioTopico servicioTopico) {
+    public TopicoController(IServicioTopico servicioTopico) {
         this.servicioTopico = servicioTopico;
     }
 
