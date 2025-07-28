@@ -78,6 +78,15 @@ public class TopicoController {
         return ResponseEntity.created(ubicacion).body(topicoCreado);
     }
 
+    @Operation(
+            summary = "Actualizar tópico",
+            description = "Actualiza tópico exixtente en el foro (requiere autenticación)"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Tópico actualizado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Datos del tópico inválidos"),
+            @ApiResponse(responseCode = "401", description = "No autorizado")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<TopicoDto> actualizarTopico(
             @PathVariable Long id,
