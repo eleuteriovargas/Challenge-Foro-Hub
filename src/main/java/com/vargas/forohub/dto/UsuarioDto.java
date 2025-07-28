@@ -14,6 +14,8 @@ import lombok.Setter;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
+
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,16 +27,16 @@ public class UsuarioDto {
 
     @Schema(description = "Nombre completo del usuario", example = "Juan Pérez", requiredMode = REQUIRED)
     @NotBlank(message = "El nombre es obligatorio")
-    private String nombre;
+   private String nombre;
 
     @Schema(description = "Email del usuario", example = "usuario@ejemplo.com", requiredMode = REQUIRED)
-    @NotBlank(message = "El email es obligatorio")
-    @Email(message = "El email debe ser válido")
+  @NotBlank(message = "El email es obligatorio")
+   @Email(message = "El email debe ser válido")
     private String email;
 
     @Schema(description = "Contraseña del usuario (mínimo 6 caracteres)", example = "password123", requiredMode = REQUIRED)
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
+   @NotBlank(message = "La contraseña es obligatoria")
+   @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     private String clave;
 
     private Usuario.RolUsuario rol;
